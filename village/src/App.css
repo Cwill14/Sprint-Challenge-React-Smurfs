@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+.nav-link {
+  margin: 10px;
+  font-size: 20px;
+}
