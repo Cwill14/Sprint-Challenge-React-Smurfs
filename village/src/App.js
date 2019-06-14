@@ -45,9 +45,13 @@ class App extends Component {
       .then(res => {
         // console.log(res);
         this.setState({ smurfs: res.data })
+        console.log(this.props);
         this.props.history.push('/');
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        // console.log(err);
+        this.setState({ error: err });
+      })
     this.setState({
       smurf: {
         name: '',
@@ -55,6 +59,16 @@ class App extends Component {
         height: ''
       }
     });
+  }
+
+  deleteSmurf = (e, id) => {
+    e.preventDefault();    
+    axios
+      .delete(`http://localhost:3333/smurfs/${id}`)
+      .then(res => {
+        this.setState({list: res.data})
+      })
+      .catch(err => console.log(err))
   }
 
   handleInputChange = e => {
@@ -77,7 +91,17 @@ class App extends Component {
           <NavLink className="nav-link" exact to="/">Smurfs</NavLink>
           <NavLink className="nav-link" to="/smurf-form">Add a Smurf</NavLink>
         </nav>
-        <Route exact path="/" render={props => <Smurfs {...props} smurfs={this.state.smurfs} /> } />        
+        <Route 
+          exact 
+          path="/" 
+          render={props => 
+            <Smurfs 
+              {...props} 
+              smurfs={this.state.smurfs}
+              deleteSmurf={this.deleteSmurf} 
+            /> 
+          } 
+        />        
         <Route 
           path="/smurf-form" 
           render={props => 
