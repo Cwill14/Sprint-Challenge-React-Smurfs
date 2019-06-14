@@ -45,13 +45,13 @@ class App extends Component {
       .then(res => {
         // console.log(res);
         this.setState({ smurfs: res.data })
-        // console.log(this.props);
-        // this.props.history.push('/');
       })
       .catch(err => {
         // console.log(err);
         this.setState({ error: err });
       })
+      console.log(this.props);
+      this.props.history.push('/');
     this.setState({
       smurf: {
         name: '',
@@ -66,7 +66,7 @@ class App extends Component {
     axios
       .delete(`http://localhost:3333/smurfs/${id}`)
       .then(res => {
-        this.setState({list: res.data})
+        this.setState({ smurfs: res.data})
       })
       .catch(err => console.log(err))
   }
