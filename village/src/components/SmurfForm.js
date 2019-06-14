@@ -20,18 +20,21 @@ const SmurfForm = props => {
           placeholder="name"
           value={props.smurf.name}
           name="name"
+          required
         />
         <input
           onChange={props.handleInputChange}
           placeholder="age"
           value={props.smurf.age}
           name="age"
+          required
         />
         <input
           onChange={props.handleInputChange}
           placeholder="height"
           value={props.smurf.height}
           name="height"
+          required
         />
         <button type="submit">Add to the village</button>
       </form>

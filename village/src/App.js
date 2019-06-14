@@ -45,8 +45,8 @@ class App extends Component {
       .then(res => {
         // console.log(res);
         this.setState({ smurfs: res.data })
-        console.log(this.props);
-        this.props.history.push('/');
+        // console.log(this.props);
+        // this.props.history.push('/');
       })
       .catch(err => {
         // console.log(err);
@@ -88,8 +88,8 @@ class App extends Component {
     return (
       <div className="App">
         <nav>
-          <NavLink className="nav-link" exact to="/">Smurfs</NavLink>
-          <NavLink className="nav-link" to="/smurf-form">Add a Smurf</NavLink>
+          <NavLink className="nav-link" exact to="/"><button>Smurfs</button></NavLink>
+          <NavLink className="nav-link" to="/smurf-form"><button>Add a Smurf</button></NavLink>
         </nav>
         <Route 
           exact 
