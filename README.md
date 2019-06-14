@@ -29,8 +29,19 @@ In this challenge, you will create a Single Page Application complete with Clien
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain the differences between `client-side routing` and `server-side routing`.
+
+  Client-side routing is how react apps work, where we only need the html sent from the server once, and we route between different components on a single page app. This means the initial load time might be slightly longer, but very little load time afterwards when navigating within the app, since we have what we need. Server-side routing is when you have multiple html pages, and to navigate between them, you need to send new server requests. This means that it takes longer navigating the website.
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+  Create: .post;
+  Read: .get;
+  Update: .put;
+  Delete: .delete; 
+
 - [ ] Mention three tools we can use to make AJAX requests.
+
+we can use the axios library, the new JS fetch method, or other similar libraries.
 
 
 ## Project Set Up
