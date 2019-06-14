@@ -10,7 +10,12 @@ class App extends Component {
     super(props);
     this.state = {
       smurfs: [],
-      error: ''
+      error: '',
+      smurf: {
+        name: '',
+        age: '',
+        height: ''
+      }
     };
   }
 
@@ -26,9 +31,45 @@ class App extends Component {
         this.setState({ error: err });
       })
   }
+
+  addSmurf = (event) => {
+    event.preventDefault();
+    // add code to create the smurf using the api
+    const newSmurf = {
+      name: this.state.smurf.name,
+      age: this.state.smurf.age,
+      height: this.state.smurf.height
+    }
+    axios
+      .post('http://localhost:3333/smurfs', newSmurf)
+      .then(res => {
+        // console.log(res);
+        this.setState({ smurfs: res.data })
+        this.props.history.push('/');
+      })
+      .catch(err => console.log(err))
+    this.setState({
+      smurf: {
+        name: '',
+        age: '',
+        height: ''
+      }
+    });
+  }
+
+  handleInputChange = e => {
+    this.setState({ 
+      smurf: {
+        ...this.state.smurf,
+        [e.target.name]: e.target.value 
+      }
+    })
+  };
+  
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
+  
   render() {
     return (
       <div className="App">
@@ -37,7 +78,18 @@ class App extends Component {
           <NavLink className="nav-link" to="/smurf-form">Add a Smurf</NavLink>
         </nav>
         <Route exact path="/" render={props => <Smurfs {...props} smurfs={this.state.smurfs} /> } />        
-        <Route path="/smurf-form" render={props => <SmurfForm {...props} smurfs={this.state.smurfs} /> } />
+        <Route 
+          path="/smurf-form" 
+          render={props => 
+            <SmurfForm 
+              {...props} 
+              smurfs={this.state.smurfs} 
+              smurf={this.state.smurf}
+              addSmurf={this.addSmurf} 
+              handleInputChange={this.handleInputChange} 
+            /> 
+          } 
+        />
       </div>
     );
   }
